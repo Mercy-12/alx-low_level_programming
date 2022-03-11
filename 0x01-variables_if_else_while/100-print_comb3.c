@@ -6,23 +6,30 @@
  */
 int main(void)
 {
-	int digit1, digit2;
+	int x, y, z;
 
-	for (digit1 = 0; digit1 < 10 ; digit1++)
+	x = 0;
+
+	while (x < 100)
 	{
-		for (digit2 = 0; digit2 < 10; digit2++)
+		y = x % 10;
+		z = x / 10;
+
+		if (z < y)
 		{
-			putchar((digit1 % 10) + '0');
-			putchar((digit2 % 10) + '0');
+			putchar(z + '0');
+			putchar(y + '0');
 
-			if ((digit1 == 9) && (digit2 == 9))
-				continue;
+			if (x < 89)
+			{
+				putchar(44);
+				putchar(32);
+			}
+		}
 
-		putchar(',');
-		putchar(' ');
+		x++;
 	}
+	putchar('\n');
 
-	}
-	putchar ('\n');
 	return (0);
 }
