@@ -1,44 +1,57 @@
-/*
- * File: 1-binary.c
- * Auth: Brennan D Baraban
- */
-
 #include "search_algos.h"
 
 /**
-  * binary_search - Searches for a value in a sorted array
-  *                 of integers using binary search.
-  * @array: A pointer to the first element of the array to search.
-  * @size: The number of elements in the array.
-  * @value: The value to search for.
-  *
-  * Return: If the value is not present or the array is NULL, -1.
-  *         Otherwise, the index where the value is located.
-  *
-  * Description: Prints the [sub]array being searched after each change.
-  */
+ * binary_search - binary search implementation
+ * @array: string
+ * @size: size_t
+ * @value: value
+ * Return: int, index of the value
+ */
+
 int binary_search(int *array, size_t size, int value)
 {
-	size_t i, left, right;
-
-	if (array == NULL)
-		return (-1);
-
-	for (left = 0, right = size - 1; right >= left;)
-	{
-		printf("Searching in array: ");
-		for (i = left; i < right; i++)
-			printf("%d, ", array[i]);
-		printf("%d\n", array[i]);
-
-		i = left + (right - left) / 2;
-		if (array[i] == value)
-			return (i);
-		if (array[i] > value)
-			right = i - 1;
-		else
-			left = i + 1;
-	}
-
+size_t i;
+int left = 0;
+int right = size;
+int middle;
+if (array == NULL)
 	return (-1);
+
+for (i = 0; left < right; i++)
+{
+	printf("Searching in array: ");
+	print_array(array, left, right);
+	middle = (left + right) / 2;
+
+	if (array[middle] < value)
+		left = middle + 1;
+	else if (array[middle] > value)
+		right = middle;
+	else
+		return (middle);
+}
+return (-1);
+}
+
+
+/**
+ * print_array - print `n` elements of an array of integers
+ * @a: int array pointer to print
+ * @i: int, start index
+ * @j: int, end index
+ * Description: Numbers must be separated by comma and space.
+ * Numbers should be displayed in the same order they are stored in array.
+ * You can only use _putchar to print.
+ */
+
+void print_array(int *a, int i, int j)
+{
+
+	for (; i < j; i++)
+	{
+		printf("%d", a[i]);
+		if (i < j - 1)
+			printf(", ");
+	}
+	printf("\n");
 }
